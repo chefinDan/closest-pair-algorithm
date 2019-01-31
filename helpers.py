@@ -25,15 +25,13 @@ def main():
 def point_dist(pt1, pt2):
     print(pt1)
     print(pt2)
-    p1 = pt1.split(' ')
-    p2 = pt2.split(' ')
-    print ("p1: ", p1)
-    print ("p2: ", p2)
+    print ("p1: ", pt1)
+    print ("p2: ", pt2)
     try:
-        x1 = int(p1[0])
-        y1 = int(p1[1])
-        x2 = int(p2[0])
-        y2 = int(p2[1])
+        x1 = int(pt1[0])
+        y1 = int(pt1[1])
+        x2 = int(pt2[0])
+        y2 = int(pt2[1])
     except ValueError:
         print("Type mismatch")
         return(0)

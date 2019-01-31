@@ -16,25 +16,29 @@ def file_len_list(file_name):
     return point_count + 1, points
 
 def brute_force(plist):
-    minList = [] # will be list of tuples (min, point 1, point 2)
-    ln = len(plist)
-    min = point_dist(plist[0], plist[1]) # just use the first set of points as the min dist
-    ln = len(plist)
+	minList = [] # will be list of tuples (min, point 1, point 2)
+	ln = len(plist)
+	if ln == 0:
+		print "empty list"
+		return
+	if ln == 1:
+		minList.append((0, plist, plist))
+		return minList
+	min = point_dist(plist[0], plist[1]) # just use the first set of points as the min dist
+	ln = len(plist)
+	if ln == 2: # with 2 points the min is there distance
+		minList.append((min, plist[0], plist[1]))
+		return minList
+	for i in range(ln-1):
+		for j in range(i + 1, ln): # range of j gets smaller as we traverse list
 
-    if ln == 2: # with 2 points the min is there distance
-        minList.append((min, plist[0], plist[1]))
-        return minList
+			if i != 0 and j != 1: # if the end of the list has not been reached
+				dist = point_dist(plist[i], plist[j])
 
-    for i in range(ln-1):
-        for j in range(i + 1, ln): # range of j gets smaller as we traverse list
-
-            if i != 0 and j != 1: # if the end of the list has not been reached
-                dist = point_dist(plist[i], plist[j])
-
-                if dist <= min:  # Update min_dist and points
-                    minList.append((dist, plist[i], plist[j]))
-                    min, p1, p2 = dist, plist[i], plist[j]
-    return minList
+				if dist <= min:  # Update min_dist and points
+					minList.append((dist, plist[i], plist[j]))
+					min, p1, p2 = dist, plist[i], plist[j]
+	return min
 
 def main():
 
