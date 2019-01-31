@@ -5,7 +5,7 @@ def main():
     pointOne = "45678 709\n"
     pointTwo = "78 56911\n"
     print("distance = ")
-    ## computes distance between any 2 points in the given .txt format
+    # computes distance between any 2 points in the given .txt format
     print(point_dist(pointOne, pointTwo))
     print()
     print("x1 = ")
@@ -19,7 +19,6 @@ def main():
     print()
     print("y diff = ")
     print(y_diff(pointOne, pointTwo))
-
 
 
 def point_dist(pt1, pt2):

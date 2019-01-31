@@ -1,30 +1,31 @@
 # Author: Daniel Green, greendan@oregonstate.edu
 
-
 import sys
-from helpers import *
 from sort_rands import *
-from bruteforce import *
+from bruteforce import brute_force
+
 
 def main():
-
-    plist = []
     filename = sys.argv[1]
-
+    distDict = {}
+    plist = []
     with open(filename, 'r') as file:
         for point in file:
             p1 = int(point.strip().split(' ')[0])
             p2 = int(point.strip().split(' ')[1])
-            plist.append((p1,p2))
+            plist.append((p1, p2))
 
-    length = len(plist)
     xsorted = sort_rands_on_x(plist)
     ysorted = sort_rands_on_y(plist)
 
-    minimum = closest_pair(xsorted, ysorted)
+    min, p1, p2 = closest_pair(xsorted, ysorted, distDict)
 
-    print minimum
-    return minimum
+    print min
+    for key, value in distDict.iteritems():
+        if value['Dist'] == min:
+            print key
+
+    return min, p1, p2
 
 
 def getmin(minlist):
@@ -39,10 +40,11 @@ def getmin(minlist):
             li.append(i[1:])
     return li
 
-def closest_pair(xlist, ylist):
+
+def closest_pair(xlist, ylist, distDict):
     length = len(xlist)
     if(length <= 3):
-        return brute_force(xlist)
+        return brute_force(xlist, distDict)
 
     mid = length // 2
     leftArrayX = xlist[:mid]
@@ -58,18 +60,13 @@ def closest_pair(xlist, ylist):
         else:
             rightArrayY.append(point)
 
-    minlist1 = closest_pair(leftArrayX, leftArrayY)
-    minlist2 = closest_pair(rightArrayX, rightArrayY)
+    minDist1, pleft1, pleft2 = closest_pair(leftArrayX, leftArrayY, distDict)
+    minDist2, pright1, pright2 = closest_pair(rightArrayX, rightArrayY, distDict)
 
-    if (minlist1 and minlist2):
-        min1 = getmin(minlist1)
-        min2 = getmin(minlist2)
-        if min1[0][0] <= min2[0][0]:
-            min = min1[0]
-        else:
-            min = min2[0]
-
-    return [min]
+    if minDist1 <= minDist2:
+        return minDist1, pleft1, pleft2
+    else:
+        return minDist2, pright1, pright2
 
 
 if(__name__ == "__main__"):
