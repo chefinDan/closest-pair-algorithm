@@ -3,12 +3,16 @@
 import sys
 from sort_rands import *
 from bruteforce import brute_force
+import decimal
+import Distance
 
 
 def main():
     filename = sys.argv[1]
-    distDict = {}
+    distObj = Distance.Distance()
     plist = []
+    minlist = []
+
     with open(filename, 'r') as file:
         for point in file:
             p1 = int(point.strip().split(' ')[0])
@@ -18,33 +22,25 @@ def main():
     xsorted = sort_rands_on_x(plist)
     ysorted = sort_rands_on_y(plist)
 
-    min, p1, p2 = closest_pair(xsorted, ysorted, distDict)
+    final = closest_pair(xsorted, ysorted, distObj)
 
-    print min
-    for key, value in distDict.iteritems():
-        if value['Dist'] == min:
-            print key
+    print final.getDistance()
+    for i in final.getPoints():
+        print i
+    return
 
-    return min, p1, p2
-
-
-def getmin(minlist):
-    if len(minlist) == 1:
-        return minlist
-
-    min = minlist[-1][0]
-    li = [min]
-
-    for i in reversed(minlist):
-        if i[0] == min:
-            li.append(i[1:])
-    return li
+# def closest_cross_pair(xlist, ylist, delta, distObj):
+#     length = int(len(xlist))
+#     mid = int(length//2)
+#     strip = xlist[int(mid-delta):int(mid+delta)]
+#     return brute_force(strip, distObj)
 
 
-def closest_pair(xlist, ylist, distDict):
+
+def closest_pair(xlist, ylist, distObj):
     length = len(xlist)
     if(length <= 3):
-        return brute_force(xlist, distDict)
+        return brute_force(xlist, distObj)
 
     mid = length // 2
     leftArrayX = xlist[:mid]
@@ -60,13 +56,23 @@ def closest_pair(xlist, ylist, distDict):
         else:
             rightArrayY.append(point)
 
-    minDist1, pleft1, pleft2 = closest_pair(leftArrayX, leftArrayY, distDict)
-    minDist2, pright1, pright2 = closest_pair(rightArrayX, rightArrayY, distDict)
+    distObj1 = closest_pair(leftArrayX, leftArrayY, distObj)
+    distObj2 = closest_pair(rightArrayX, rightArrayY, distObj)
 
-    if minDist1 <= minDist2:
-        return minDist1, pleft1, pleft2
+    if distObj1.getDistance() < distObj2.getDistance():
+        delta = distObj1.getDistance()
+        min = distObj1
     else:
-        return minDist2, pright1, pright2
+        delta = distObj2.getDistance()
+        min = distObj2
+
+    # the closest_cross_pair function goes here.
+    # params: xlist, ylist, delta, ??
+
+    if distObj1.getDistance() < distObj2.getDistance():
+        return distObj1
+    else:
+        return distObj2
 
 
 if(__name__ == "__main__"):
