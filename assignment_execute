@@ -6,30 +6,60 @@ echo "Written by"
 echo "Daniel Green"
 echo "Grayland Lunn"
 echo "and Alex Tovar"
-sleep 3s
+
+echo "This script will now execute all 3 implementations on 4 different file sizes"
+
+sleep 5s
 echo ""
-echo "Enhanced divide and conquer runtimes: "
+echo " --------------- Enhanced divide and conquer runtimes ------------------ "
+
 echo "10^2 input vars:"
-time python enhanced-divide-and-conquer.py ./Testing\ Cases/random_10_2.txt 
+time python enhanced-divide-and-conquer.py unsorted_10_2.txt
 echo ""
 echo "10^3 input vars:"
-time python enhanced-divide-and-conquer.py ./Testing\ Cases/random_10_3.txt 
+time python enhanced-divide-and-conquer.py unsorted_10_3.txt
 echo""
 echo "10^4 input vars:"
-time python enhanced-divide-and-conquer.py ./Testing\ Cases/random_10_4.txt 
+time python enhanced-divide-and-conquer.py unsorted_10_4.txt
 echo ""
 echo "10^5 input vars:"
-time python enhanced-divide-and-conquer.py ./Testing\ Cases/random_10_5.txt 
+time python enhanced-divide-and-conquer.py unsorted_10_5.txt
 
-echo "Brute force runtimes: "
+sleep 3s
+
+printf "\n\n\n\n\n\n\n\n"
+
+echo " --------------- Naive divide and conquer runtimes ------------------ "
+
 echo "10^2 input vars:"
-time python run-brute-force.py ./Testing\ Cases/random_10_2.txt 
+time python naive-divide-and-conquer.py unsorted_10_2.txt
 echo ""
 echo "10^3 input vars:"
-time python run-brute-force.py ./Testing\ Cases/random_10_3.txt 
+time python naive-divide-and-conquer.py unsorted_10_3.txt
 echo""
 echo "10^4 input vars:"
-time python run-brute-force.py ./Testing\ Cases/random_10_4.txt 
+time python naive-divide-and-conquer.py unsorted_10_4.txt
+echo ""
+echo "10^5 input vars:"
+time python naive-divide-and-conquer.py unsorted_10_5.txt
+
+sleep 3s
+
+printf "\n\n\n\n\n\n\n\n"
+
+
+echo " ---------------- Brute force runtimes -------------------------------------- "
+echo "*** WARNING: The 10^5 size list is commented out due to it's extended runtime."
+
+sleep 3s
+echo "10^2 input vars:"
+time python run-brute-force.py ./Testing\ Cases/random_10_2.txt
+echo ""
+echo "10^3 input vars:"
+time python run-brute-force.py ./Testing\ Cases/random_10_3.txt
+echo""
+echo "10^4 input vars:"
+time python run-brute-force.py ./Testing\ Cases/random_10_4.txt
 echo ""
 #echo "10^5 input vars:"
-#time python enhanced-divide-and-conquer.py ./Testing\ Cases/random_10_5.txt 
+#time python enhanced-divide-and-conquer.py ./Testing\ Cases/random_10_5.txt
