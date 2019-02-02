@@ -2,6 +2,7 @@ import sys
 from helpers import point_dist
 
 
+
 class Distance:
     def __init__(self):
         self.distance = sys.maxint
@@ -14,7 +15,8 @@ class Distance:
         return self.distance
 
     def addPoints(self, point1, point2):
-        self.points.append((point1, point2))
+        if (point1, point2) not in self.points and (point2, point1) not in self.points:
+            self.points.append((point1, point2))
 
     def setDistance(self, distance):
         self.distance = distance
@@ -37,7 +39,9 @@ class Distance:
             self.distance = distObj.getDistance()
             self.points = distObj.getPoints()
         elif  self.distance == distObj.getDistance():
-            self.points = self.points + [i for i in distObj.getPoints() if i not in self.points]
+            for pair in distObj.getPoints():
+                self.addPoints(pair[0],pair[1])
+                #self.points = self.points + [i for i in distObj.getPoints() if i not in self.points]
         return self
 
     def prettyPrint(self):

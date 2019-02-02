@@ -23,15 +23,14 @@ def main():
             plist.append((p1, p2))
 
     xsorted = sort_rands_on_x(plist)
-    ysorted = sort_rands_on_y(plist)
 
-    final = closest_pair(xsorted, ysorted, distObj)
+    final = closest_pair(xsorted, distObj)
 
     #final = brute_force(plist, distObj)
 
     print final.getDistance()
     for i in final.getPoints():
-        print i
+        print (i)
     return
 
 def closest_cross_pair(xlist, delta):
@@ -55,7 +54,7 @@ def closest_cross_pair(xlist, delta):
 
 
 
-def closest_pair(xlist, ylist, distObj):
+def closest_pair(xlist, distObj):
     length = len(xlist)
     index = 0
     if(length <= 3):
@@ -69,26 +68,13 @@ def closest_pair(xlist, ylist, distObj):
     leftArrayX = xlist[:mid]
     rightArrayX = xlist[mid:]
 
-    midpoint = xlist[mid][0]
-    leftArrayY = []
-    rightArrayY = []
 
-
-    distObj1 = closest_pair(leftArrayX, leftArrayY, distObj)
-    distObj2 = closest_pair(rightArrayX, rightArrayY, distObj)
+    distObj1 = closest_pair(leftArrayX, distObj)
+    distObj2 = closest_pair(rightArrayX, distObj)
 
     distObj1.combine(distObj2)
     delta = distObj1.getDistance()
 
-    # if distObj1.getDistance() < distObj2.getDistance():
-    #     delta = distObj1.getDistance()
-    #     min_lr = distObj1
-    # else:
-    #     delta = distObj2.getDistance()
-    #     min_lr = distObj2
-
-    # the closest_cross_pair function goes here.
-    # params: xlist, ylist, delta, ??
 
     min_cross = closest_cross_pair(xlist, delta)
 
