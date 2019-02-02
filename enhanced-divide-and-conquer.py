@@ -14,6 +14,7 @@ def main():
     minlist = []
 
     with open(filename, 'r') as file:
+        # p1 is x coord, p2 is y coord
         for point in file:
             p1 = int(point.strip().split(' ')[0])
             p2 = int(point.strip().split(' ')[1])
@@ -29,11 +30,18 @@ def main():
         print i
     return
 
-# def closest_cross_pair(xlist, ylist, delta, distObj):
-#     length = int(len(xlist))
-#     mid = int(length//2)
-#     strip = xlist[int(mid-delta):int(mid+delta)]
-#     return brute_force(strip, distObj)
+def closest_cross_pair(xlist, delta):
+    length = int(len(xlist))
+    mid = int(length//2)
+    strip = xlist[int(mid-delta):int(mid+delta)]
+    strip = sort_rands_on_y(strip)
+    for point in strip:
+        for i in range (0,7):
+            print()
+
+
+
+    return
 
 
 
