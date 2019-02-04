@@ -1,6 +1,9 @@
 # CS 325 Algorithms Implementation Assignment 1
 Written by: Daniel Green, Grayland Lunn, Alex Tovar
 
+This program demonstrates 3 different Python implementations of the divide-and-conquer algorithmic solution to the closest pair of points problem.
+Each Python script takes a file with single (x,y) points of any length at stdin.
+
 Instructions for usage:
 
   To run the enhanced-divide-and-conquer function enter the command:
